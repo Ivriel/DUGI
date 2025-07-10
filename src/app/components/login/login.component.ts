@@ -27,11 +27,13 @@ export class LoginComponent {
     console.log('Data yang akan dikirim ke API:', this.loginObj);
     this.authService.sendDataLogin(this.loginObj).subscribe({
       next: (res: any) => {
-        alert('Login berhasil');
-        this.router.navigateByUrl("form-absen-manual")
         console.log('Login berhasil: ', res);
-        if (res.accessToken) {
+        if (res.accessToken !== null) {
+          alert('Login berhasil');
           this.authService.setToken(res.accessToken);
+          this.router.navigateByUrl("form-absen-manual")
+        } else {
+          alert("kredensial salah")
         }
       },
       error: (error) => {
