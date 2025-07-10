@@ -28,10 +28,10 @@ export class LoginComponent {
     this.authService.sendDataLogin(this.loginObj).subscribe({
       next: (res: any) => {
         alert('Login berhasil');
+        this.router.navigateByUrl("form-absen-manual")
         console.log('Login berhasil: ', res);
         if (res.accessToken) {
           this.authService.setToken(res.accessToken);
-          this.router.navigateByUrl("login")
         }
       },
       error: (error) => {
