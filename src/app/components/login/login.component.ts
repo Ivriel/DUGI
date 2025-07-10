@@ -3,6 +3,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
     password: '',
   };
 
-  constructor(private authService: AuthService, private title: Title) {
+  constructor(private authService: AuthService, private title: Title,private router:Router) {
     this.title.setTitle('Login');
   }
 
@@ -30,6 +31,7 @@ export class LoginComponent {
         console.log('Login berhasil: ', res);
         if (res.accessToken) {
           this.authService.setToken(res.accessToken);
+          this.router.navigateByUrl("login")
         }
       },
       error: (error) => {

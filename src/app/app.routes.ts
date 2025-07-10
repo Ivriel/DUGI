@@ -8,7 +8,7 @@ export const routes: Routes = [
     {
         path:'',
         pathMatch:'full',
-        redirectTo:'form-absen-manual'
+        redirectTo:'login'
     },
     {
         path:'login',
