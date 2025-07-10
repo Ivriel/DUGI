@@ -1,17 +1,51 @@
-<form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
-    <h2>Form Login</h2>
+<form
+  #loginForm="ngForm"
+  (ngSubmit)="onLoginSubmit(loginForm)"
+  class="container mt-5 p-4 border rounded shadow-sm"
+  style="max-width: 400px"
+>
+  <h2 class="mb-4 text-center">Form Login</h2>
 
-    <div>
-        <label for="email">Enter your email: </label>
-        <input type="email" #email="ngModel" [(ngModel)]="loginObj.email" name="email" id="email">
+  <div class="mb-3">
+    <label for="email" class="form-label">Enter your email</label>
+    <input
+      type="email"
+      #email="ngModel"
+      [(ngModel)]="loginObj.email"
+      name="email"
+      id="email"
+      class="form-control"
+      required
+      [ngClass]="{ 'is-invalid': email.invalid && email.touched }"
+    />
+    <div class="invalid-feedback" *ngIf="email.invalid && email.touched">
+      Email is required and must be valid.
     </div>
+  </div>
 
-    <div>
-        <label for="password">Enter your password</label>
-        <input type="password" #password="ngModel" [(ngModel)]="loginObj.password" name="password" id="password">
+  <div class="mb-3">
+    <label for="password" class="form-label">Enter your password</label>
+    <input
+      type="password"
+      #password="ngModel"
+      [(ngModel)]="loginObj.password"
+      name="password"
+      id="password"
+      class="form-control"
+      required
+      [ngClass]="{ 'is-invalid': password.invalid && password.touched }"
+    />
+    <div class="invalid-feedback" *ngIf="password.invalid && password.touched">
+      Password is required.
     </div>
+  </div>
 
-    <button type="submit">
-        Login
-    </button>
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="btn btn-primary w-100"
+    [disabled]="loginForm.invalid"
+  >
+    Login
+  </button>
 </form>
