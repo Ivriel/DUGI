@@ -4,12 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CutiService } from '../../services/list-approval-cuti.service';
 import { AuthService } from '../../services/auth.service';
 
-import { CommonModule, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-list-approval-cuti',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgClass, NgFor, NgIf],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './list-approval-cuti.component.html',
   styleUrls: ['./list-approval-cuti.component.css'],
   providers: [DatePipe],
