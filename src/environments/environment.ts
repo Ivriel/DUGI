@@ -3,6 +3,7 @@ export const environment = {
     apiBase: {
         loginApi:'loginApiUrl',
         absenManualApi:'absenManualApiUrl',
-        pengajuanCutiApi:'pengajuanCutiApi'
+        pengajuanCutiApi:'pengajuanCutiApi',
+        employeeApi:'employeeApi'
     }
 };
