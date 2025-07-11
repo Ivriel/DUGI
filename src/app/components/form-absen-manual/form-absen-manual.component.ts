@@ -32,6 +32,7 @@ export class FormAbsenManualComponent implements OnInit {
   currentTime:string = ''
   selectedDate:string = ''
   selectedTime:string = ''
+  isTimeTouched:boolean = false // buat update display waktu kalau belum dipilih
 
 
   absenManualObj: any = {
@@ -146,6 +147,12 @@ export class FormAbsenManualComponent implements OnInit {
       minute:'2-digit',
       second:'2-digit'
     })
+
+    if(!this.isTimeTouched) {
+      const hour = String(dateTimeNow.getHours()).padStart(2,'0')
+      const minute = String(dateTimeNow.getMinutes()).padStart(2,'0')
+      this.selectedTime = `${hour}:${minute}`
+    }
 
   }
 
