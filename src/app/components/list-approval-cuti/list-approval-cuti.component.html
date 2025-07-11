@@ -1,0 +1,86 @@
+<form [formGroup]="filterForm">
+  <div class="d-flex gap-3 mb-4 flex-wrap">
+    <input
+      type="text"
+      class="form-control w-auto"
+      placeholder="Pencarian"
+      formControlName="keyword"
+    />
+    <input type="date" class="form-control w-auto" formControlName="start" />
+    <input type="date" class="form-control w-auto" formControlName="end" />
+    <button class="btn btn-success" type="button" (click)="getListCuti()">
+      Cari
+    </button>
+    <button class="btn btn-danger" type="button" (click)="resetForm()">
+      Reset
+    </button>
+  </div>
+
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="!filterForm.value.status"
+        (click)="setStatus('')"
+        >Semua</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="filterForm.value.status === 'Waiting Approval'"
+        (click)="setStatus('Waiting Approval')"
+        >Menunggu</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="filterForm.value.status === 'Disetujui'"
+        (click)="setStatus('Disetujui')"
+        >Disetujui</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="filterForm.value.status === 'Ditolak'"
+        (click)="setStatus('Ditolak')"
+        >Ditolak</a
+      >
+    </li>
+  </ul>
+</form>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Employee ID</th>
+      <th>Tanggal</th>
+      <th>Keterangan</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listCuti">
+      <td>{{ item.employeeId }}</td>
+      <td>
+        {{ item.cutiStart | date : "dd/MM/yyyy" }} -
+        {{ item.cutiEnd | date : "dd/MM/yyyy" }}
+      </td>
+      <td>{{ item.keterangan }}</td>
+      <td>
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-warning text-dark': item.status === 'Waiting Approval',
+            'bg-primary': item.status === 'Disetujui',
+            'bg-danger': item.status === 'Ditolak'
+          }"
+        >
+          {{ item.status }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
