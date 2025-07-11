@@ -17,7 +17,11 @@ export class LoginComponent {
     password: '',
   };
 
-  constructor(private authService: AuthService, private title: Title,private router:Router) {
+  constructor(
+    private authService: AuthService,
+    private title: Title,
+    private router: Router
+  ) {
     this.title.setTitle('Login');
   }
 
@@ -31,9 +35,10 @@ export class LoginComponent {
         if (res.accessToken !== null) {
           alert('Login berhasil');
           this.authService.setToken(res.accessToken);
-          this.router.navigateByUrl("form-absen-manual")
+          localStorage.setItem('userData', JSON.stringify(res));
+          this.router.navigateByUrl('form-absen-manual');
         } else {
-          alert("kredensial salah")
+          alert('kredensial salah');
         }
       },
       error: (error) => {
