@@ -1,6 +1,8 @@
 export const environment = {
     production:false,
     apiBase: {
-        loginApi:'loginApiUrl'
+        loginApi:'loginApiUrl',
+        absenManualApi:'absenManualApiUrl',
+        pengajuanCutiApi:'pengajuanCutiApi'
     }
 };
