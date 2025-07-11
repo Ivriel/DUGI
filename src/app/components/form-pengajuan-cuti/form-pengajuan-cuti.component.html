@@ -1,2 +1,84 @@
-<p>form-pengajuan-cuti works!</p>
-<button (click)="logout()">Logout</button>
+<div class="p-4 bg-dark text-white min-vh-100">
+  <h4 class="text-center fw-semibold mb-4">Pengajuan Cuti</h4>
+
+  <!-- Foto & Info -->
+  <div class="text-center mb-4">
+    <img
+      [src]="user.photo || 'https://i.pinimg.com/736x/05/11/45/051145a8e366876f859378154aa7df8b.jpg'"
+      class="rounded-circle border border-light"
+      width="100"
+      height="100"
+    />
+    <h6 class="mt-2 text-success fw-bold">{{ user.fullname }}</h6>
+    <p class="text-light m-0">{{user.position}}</p>
+    <p class="text-light m-0">Divisi - {{ user.divisionName }}</p>
+  </div>
+
+  <!-- Form -->
+  <form #leaveForm="ngForm" (ngSubmit)="onSubmit(leaveForm)">
+    <div class="form-group mb-3">
+      <label class="form-label">Tanggal</label>
+      <div class="d-flex flex-column flex-md-row gap-2">
+        <input
+          type="date"
+          class="form-control bg-secondary text-white border-0"
+          [(ngModel)]="tanggalRange.start"
+          name="start"
+          (change)="hitungInterval()"
+          required
+        />
+        <input
+          type="date"
+          class="form-control bg-secondary text-white border-0"
+          [(ngModel)]="tanggalRange.end"
+          name="end"
+          (change)="hitungInterval()"
+          required
+        />
+      </div>
+      <small *ngIf="interval" class="text-info">Durasi: {{ interval }} hari</small>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Jenis Cuti</label>
+      <select
+        class="form-select bg-secondary text-white border-0"
+        name="jenis"
+        [(ngModel)]="selectedJenis"
+        required
+      >
+        <option value="" disabled>- Pilih Jenis Cuti -</option>
+        <option *ngFor="let jenis of jenisCuti" [value]="jenis.id">
+          {{ jenis.nama }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3" *ngIf="selectedJenis == 3">
+      <label class="form-label">Upload Surat Dokter</label>
+      <input
+        type="file"
+        class="form-control bg-secondary text-white border-0"
+        (change)="onFileChange($event)"
+        required
+      />
+    </div>
+
+    <div class="form-group mb-4">
+      <label class="form-label">Keterangan</label>
+      <textarea
+        class="form-control bg-secondary text-white border-0"
+        name="keterangan"
+        ngModel
+        rows="3"
+        placeholder="Masukkan keterangan tambahan"
+      ></textarea>
+    </div>
+
+    <div *ngIf="formErrorMessage" class="alert alert-danger text-center fw-semibold">
+        {{ formErrorMessage }}
+    </div>
+
+    <button class="btn btn-success w-100 fw-semibold">Submit</button>
+  </form>
+</div>
