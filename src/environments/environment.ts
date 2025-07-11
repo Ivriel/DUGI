@@ -4,6 +4,7 @@ export const environment = {
         loginApi:'loginApiUrl',
         absenManualApi:'absenManualApiUrl',
         pengajuanCutiApi:'pengajuanCutiApi',
-        employeeApi:'employeeApi'
+        employeeApi:'employeeApi',
+        locationApi:'locationApiUrl'
     }
 };
