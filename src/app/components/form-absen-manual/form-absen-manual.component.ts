@@ -7,7 +7,7 @@ import { LocationService } from '../../services/location.service';
 import { EmployeeService } from '../../services/employee.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-form-absen-manual',
   imports: [FormsModule,CommonModule],
@@ -42,7 +42,7 @@ export class FormAbsenManualComponent implements OnInit {
     inOut: '', // masum / keluar (valuenya 'In'/'Out')
     checkInOut: '', // Bisa diinput manual sendiri
     remark: '',
-    locationId: 0,
+    locationId: '',
     photo: '', // buat sekarang kasih string kosong aja
     latitude: 0,
     longitude: 0,
@@ -62,7 +62,7 @@ export class FormAbsenManualComponent implements OnInit {
 
   }
 
-  addAbsenManual(){
+  addAbsenManual(form:NgForm){
     this.absenManualObj.locationId= Number(this.absenManualObj.locationId) // ubah ke number dulu soalnya dari value select selalu string hasilnya 
     this.setAbsenTime() // ubah ke string ISO dulu datenya
     this.isLoading= true
@@ -72,7 +72,10 @@ export class FormAbsenManualComponent implements OnInit {
         alert("Absen manual berhasil tekirim")
         console.log("Payload yang dikirim:", this.absenManualObj);
         this.isLoading = false
-        this.resetForm()
+        form.resetForm({
+          inOut:'', // biar option yang jadi placeholder masih muncul pas udah dikirim isi form nya 
+          locationId:''
+        })
       },
       error:(err:any)=> {
         alert("Gagal mengirim absen manual")
@@ -187,15 +190,6 @@ export class FormAbsenManualComponent implements OnInit {
     } 
   }
   
-
-  resetForm(){
-    this.absenManualObj.inOut='';
-    this.absenManualObj.remark='';
-    this.absenManualObj.locationId=0;
-    this.selectedDate = '';
-    this.selectedTime = ''
-    this.getCurrentLocation()
-  }
 
   logout() {
     const isLogout = confirm('Are you sure you wanna to logout?');
