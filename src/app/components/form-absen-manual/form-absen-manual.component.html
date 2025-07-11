@@ -1,5 +1,65 @@
-<p>form-absen-manual works!</p>
-<button (click)="logout()">Logout</button>
-<form action="zz">
-  <input type="text" />
+<h3>Absen Manual Form</h3>
+<div>
+    <strong>Waktu sekarang:</strong> {{currentTime}}
+</div>
+
+<form #absenManualForm="ngForm" (ngSubmit)="addAbsenManual()">
+  
+    <div>
+        <label for="inOut">Jenis Absen *</label>
+        <select name="inOut" id="inOut" [(ngModel)]="absenManualObj.inOut" required>
+            <option value="In">Masuk</option>
+            <option value="Out">Keluar</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="selectedDate">Tanggal *</label>
+        <input type="date"
+        name="selectedDate"
+        id="selectedDate"
+        [(ngModel)]="selectedDate"
+        required
+        >
+    </div>
+
+    <div>
+        <label for="selectedTime">Waktu</label>
+        <input type="time"
+        name="selectedTime"
+        id="selectedTime"
+        [(ngModel)]="selectedTime"
+        required
+        >
+    </div>
+
+    <div>
+        <label for="locationId">Lokasi *</label>
+        <select name="locationId" id="locationId" [(ngModel)]="absenManualObj.locationId" required>
+            <option *ngFor="let location of locations" [value]="location.id">
+                {{location.name}}
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <div>
+            <label>Latitude:</label>
+            <span>{{absenManualObj.latitude}}</span>
+        </div>
+        <div>
+            <label>Longitude:</label>
+            <span>{{absenManualObj.longitude}}</span>
+        </div>
+    </div>
+
+    <div>
+        <label for="remark">Keterangan *</label>
+        <textarea name="remark" id="remark" placeholder="Masukkan keterangan absen..." rows="3" [(ngModel)]="absenManualObj.remark" required></textarea>
+    </div>
+
+    <button type="submit">
+        Submit
+    </button>
 </form>
+<button (click)="logout()">Logout</button>
