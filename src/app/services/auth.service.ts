@@ -3,23 +3,34 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl:string = environment.apiBase.loginApi
-  constructor(private http:HttpClient) { }
+  private apiUrl: string = environment.apiBase.loginApi;
+  constructor(private http: HttpClient) {}
 
-  sendDataLogin(loginData:{email:string;password:string;}){
-    console.log("Data yang dikirim ke API: ",loginData)
-    console.log("Alamat API LOGIN: ",this.apiUrl)
-    return this.http.post(this.apiUrl,loginData)
+  sendDataLogin(loginData: { email: string; password: string }) {
+    console.log('Data yang dikirim ke API: ', loginData);
+    console.log('Alamat API LOGIN: ', this.apiUrl);
+    return this.http.post(this.apiUrl, loginData);
   }
 
-  setToken(token:string){
-    localStorage.setItem('token',token)
+  setToken(token: string) {
+    localStorage.setItem('token', token);
   }
 
-  logout(){
-    localStorage.removeItem('token')
+  logout() {
+    localStorage.removeItem('token');
+  }
+
+  getEmployeeInfo() {
+    const token = localStorage.getItem('token');
+
+    return this.http.get<any>(environment.apiBase.employeeApi);
+  }
+
+  getUserInfo(email: string) {
+    const url = environment.apiBase.employeeApi + `?email=${email}`;
+    return this.http.get<any>(url);
   }
 }
