@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CutiService } from '../../services/list-approval-cuti.service';
 import { AuthService } from '../../services/auth.service';
 
-import { CommonModule, DatePipe} from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 
 @Component({
