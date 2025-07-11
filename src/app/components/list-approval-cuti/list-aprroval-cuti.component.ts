@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 
 import { CommonModule, DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-list-approval-cuti',
   standalone: true,
@@ -32,7 +33,7 @@ export class ListApprovalCutiComponent implements OnInit {
       companyId: [0],
       employeeId: [0],
       status: ['All'],
-      pageSize: [10],
+      pageSize: [20],
       pageNumber: [1],
     });
   }
