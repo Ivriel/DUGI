@@ -14,6 +14,7 @@ export class FormAbsenManualComponent {
     this.title.setTitle("Form Absen Manual")
   }
 
+  
 
 
   logout(){
