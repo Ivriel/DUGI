@@ -1,65 +1,65 @@
-<h3>Absen Manual Form</h3>
-<div>
-    <strong>Waktu sekarang:</strong> {{currentTime}}
-</div>
-
-<form #absenManualForm="ngForm" (ngSubmit)="addAbsenManual()">
+<div class="d-flex justify-content-center mt-3 align-items-center h-100">
+    <div class="container p-4 border rounded shadow-sm bg-white" style="max-width: 600px;">
   
-    <div>
-        <label for="inOut">Jenis Absen *</label>
-        <select name="inOut" id="inOut" [(ngModel)]="absenManualObj.inOut" required>
+      <form
+        #absenManualForm="ngForm"
+        (ngSubmit)="addAbsenManual(absenManualForm)"
+        class="mt-4"
+      >
+        <h3 class="mb-4 text-center">Absen Manual Form</h3>
+  
+        <div class="mb-3">
+          <label for="inOut" class="form-label">Jenis Absen <span class="text-danger">*</span></label>
+          <select class="form-select" #inOut="ngModel" name="inOut" id="inOut" [(ngModel)]="absenManualObj.inOut" required>
+            <option disabled selected value="">Pilih Jenis Absen</option>
             <option value="In">Masuk</option>
             <option value="Out">Keluar</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="selectedDate">Tanggal *</label>
-        <input type="date"
-        name="selectedDate"
-        id="selectedDate"
-        [(ngModel)]="selectedDate"
-        required
-        >
-    </div>
-
-    <div>
-        <label for="selectedTime">Waktu</label>
-        <input type="time"
-        name="selectedTime"
-        id="selectedTime"
-        [(ngModel)]="selectedTime"
-        required
-        >
-    </div>
-
-    <div>
-        <label for="locationId">Lokasi *</label>
-        <select name="locationId" id="locationId" [(ngModel)]="absenManualObj.locationId" required>
+          </select>
+          <span *ngIf="inOut.invalid && inOut.touched" class="text-danger">This field is required</span>
+        </div>
+  
+        <div class="mb-3">
+          <label for="selectedDate" class="form-label">Tanggal <span class="text-danger">*</span></label>
+          <input type="date" class="form-control" name="selectedDate" id="selectedDate" [(ngModel)]="selectedDate" required />
+        </div>
+  
+        <div class="mb-3">
+          <label for="selectedTime" class="form-label">Waktu <span class="text-danger">*</span> </label>
+          <input type="time" class="form-control" name="selectedTime" id="selectedTime" (change)="isTimeTouched = true" [(ngModel)]="selectedTime" required />
+        </div>
+  
+        <div class="mb-3">
+          <label for="locationId" class="form-label">Lokasi <span class="text-danger">*</span> </label>
+          <select  #locationId="ngModel" class="form-select" name="locationId" id="locationId" [(ngModel)]="absenManualObj.locationId" required>
+            <option value="" disabled selected >Pilih Lokasi</option>
             <option *ngFor="let location of locations" [value]="location.id">
-                {{location.name}}
+              {{ location.name }}
             </option>
-        </select>
-    </div>
-
-    <div>
-        <div>
-            <label>Latitude:</label>
-            <span>{{absenManualObj.latitude}}</span>
+          </select>
+          <span *ngIf="locationId.invalid && locationId.touched" class="text-danger">This field is required</span>
         </div>
-        <div>
-            <label>Longitude:</label>
-            <span>{{absenManualObj.longitude}}</span>
+  
+        <!-- Latitude & Longitude -->
+        <div class="mb-3 d-flex gap-2">
+          <div class="w-100">
+            <label class="form-label">Latitude:</label>
+            <div class="form-control bg-light">{{ absenManualObj.latitude }}</div>
+          </div>
+          <div class="w-100">
+            <label class="form-label">Longitude:</label>
+            <div class="form-control bg-light">{{ absenManualObj.longitude }}</div>
+          </div>
         </div>
+  
+        <div class="mb-3">
+          <label for="remark" class="form-label">Keterangan <span class="text-danger">*</span> </label>
+          <textarea #remark="ngModel" class="form-control" name="remark" id="remark" placeholder="Masukkan keterangan absen..." rows="3" [(ngModel)]="absenManualObj.remark" required></textarea>
+          <span *ngIf="remark.invalid && remark.touched" class="text-danger">This field is required</span>
+        </div>
+  
+        <button [disabled]="absenManualForm.invalid" [ngClass]="absenManualForm.invalid?'btn btn-secondary':'btn btn-primary'" class=" w-100" type="submit">Submit</button>
+      </form>
+  
     </div>
-
-    <div>
-        <label for="remark">Keterangan *</label>
-        <textarea name="remark" id="remark" placeholder="Masukkan keterangan absen..." rows="3" [(ngModel)]="absenManualObj.remark" required></textarea>
-    </div>
-
-    <button type="submit">
-        Submit
-    </button>
-</form>
-<button (click)="logout()">Logout</button>
+  </div>
+  <button  class="btn btn-outline-danger mt-3 mb-3" (click)="logout()">Logout</button>
