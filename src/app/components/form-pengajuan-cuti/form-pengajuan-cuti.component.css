@@ -1,0 +1,31 @@
+body {
+  background-color: #1f1f1f;
+  color: #fff;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.form-control,
+.form-select {
+  background-color: #3b3e47;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.form-control::placeholder,
+textarea::placeholder {
+  color: #ccc;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #86efac;
+  box-shadow: none;
+}
+
+h4,
+label {
+  color: #ddd;
+}
